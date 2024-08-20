@@ -29,18 +29,18 @@ public class NotificationService {
             String dateText = message.substring(8, 24);
             LocalDateTime date = LocalDateTime.parse(dateText, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
             if(date.isBefore(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES))) {
-                throw new NoWayToNotifyException();
+                throw new NoWayToNotifyException("Ошибка! Невозможно отправить сообщение в прошлое. Если бы я умел, я бы не был простым ботом.");
             }
             NotificationTask notification = new NotificationTask(chatId, message.substring(25), date);
             saveNotify(notification);
             return dateText;
         } else {
-            throw new IncorrectCommandException();
+            throw new IncorrectCommandException("Ошибка! Команда должна быть выглядеть следующим образом: \"/nofity дд.мм.гггг чч:мм Напоминание\"");
         }
     }
 
-    public void saveNotify(NotificationTask notificationTask) {
-        notificationTaskRepository.save(notificationTask);
+    public NotificationTask saveNotify(NotificationTask notificationTask) {
+        return notificationTaskRepository.save(notificationTask);
     }
 
     public List<NotificationTask> getNotifiesByDate(String dateText) {

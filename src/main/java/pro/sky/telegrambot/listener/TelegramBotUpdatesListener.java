@@ -53,10 +53,10 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                     message = new SendMessage(chatId, "Уведомление создано. Я направлю вам сообщение: " + date);
                     telegramBot.execute(message);
                 } catch (IncorrectCommandException e) {
-                    message = new SendMessage(chatId, "Ошибка! Команда должна быть выглядеть следующим образом: \"/nofity дд.мм.гггг чч:мм Напоминание\"");
+                    message = new SendMessage(chatId, e.getMessage());
                     telegramBot.execute(message);
                 } catch (NoWayToNotifyException e) {
-                    message = new SendMessage(chatId, "Ошибка! Невозможно отправить сообщение в прошлое. Если бы я умел, я бы не был простым ботом.");
+                    message = new SendMessage(chatId, e.getMessage());
                     telegramBot.execute(message);
                 }
             }
