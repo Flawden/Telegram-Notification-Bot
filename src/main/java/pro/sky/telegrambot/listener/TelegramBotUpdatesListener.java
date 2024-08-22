@@ -64,15 +64,6 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
 
-    @Scheduled(cron = "0 0/1 * * * *")
-    public void notificationSender() {
-        List<NotificationTask> tasks = notificationService.getNotifiesByDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
-        if (!tasks.isEmpty()) {
-            for (NotificationTask task: tasks) {
-                SendMessage message = new SendMessage(task.getChatId(), "Вы просили напомнить меня о следующем: " + task.getNotificationMessage());
-                telegramBot.execute(message);
-            }
-        }
-    }
+
 
 }
