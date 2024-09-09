@@ -1,4 +1,5 @@
-spring.datasource.url=
-spring.datasource.username=
-spring.datasource.password=
-telegram.bot.token=
+spring.datasource.url=jdbc:postgresql://localhost:5432/TG-bot-db
+spring.datasource.username=Flawden
+spring.datasource.password=My_Secret_Password
+spring.jpa.hibernate.ddl-auto=create-drop
+telegram.bot.token=My_Secret_Token
